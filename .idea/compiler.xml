@@ -6,10 +6,12 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
+        <module name="DeviceManager" />
         <module name="iOSDeviceManager" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
+      <module name="DeviceManager" target="1.8" />
       <module name="iOSDeviceManager" target="1.8" />
     </bytecodeTargetLevel>
   </component>

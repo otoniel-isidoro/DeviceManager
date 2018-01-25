@@ -31,6 +31,40 @@ public class AndroidManager implements Manager {
         }
     }
 
+    public void connectRemote(String address) throws Exception {
+        String output = cmd.runCommandThruProcess("adb connect " + address);
+        String[] lines = output.split("\n");
+        if (lines[0].contains("internal or external command")) {
+            System.out.println("Please set ANDROID_HOME in your system variables");
+        }
+        Integer timeout = 0;
+        while(!this.cmd.runCommandThruProcess("adb devices").contains(address) && timeout <= 10000){
+            Thread.sleep(200);
+            timeout+=200;
+        }
+    }
+
+    public void disconnectRemote(String address) throws Exception {
+        String output = cmd.runCommandThruProcess("adb disconnect " + address);
+        String[] lines = output.split("\n");
+        if (lines[0].contains("internal or external command")) {
+            System.out.println("Please set ANDROID_HOME in your system variables");
+        }
+    }
+
+    public String executeShellCommand(String deviceID, String command) throws Exception {
+        String output = cmd.runCommandThruProcess("adb -s " + deviceID + " shell " + command);
+        String[] lines = output.split("\n");
+        if (lines[0].contains("internal or external command")) {
+            System.out.println("Please set ANDROID_HOME in your system variables");
+        }
+        return output;
+    }
+
+    public String executeCommand(String command) throws Exception {
+        return cmd.runCommandThruProcess(command);
+    }
+
     public JSONObject getDeviceInfo(String deviceID) throws InterruptedException, IOException {
         String model =
                 cmd.runCommandThruProcess("adb -s " + deviceID

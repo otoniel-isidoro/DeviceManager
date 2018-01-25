@@ -4,9 +4,9 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>com.thoughtworks.iOSDeviceManager</groupId>
-    <artifactId>iOSDeviceManager</artifactId>
-    <version>2.1</version>
+    <groupId>com.github.SrinivasanTarget</groupId>
+    <artifactId>DeviceManager</artifactId>
+    <version>fc20b7c8a3</version>
     <repositories>
         <repository>
             <id>jitpack.io</id>

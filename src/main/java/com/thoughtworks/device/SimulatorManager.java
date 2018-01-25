@@ -210,7 +210,9 @@ public class SimulatorManager implements ISimulatorManager {
     public List<Device> getAllAvailableSimulators() throws IOException, InterruptedException {
         CommandPromptUtil commandPromptUtil = new CommandPromptUtil();
         String simulatorJsonString = commandPromptUtil.runCommandThruProcess("xcrun simctl list -j devices");
-
+        if(simulatorJsonString== null || (simulatorJsonString!= null && simulatorJsonString.isEmpty())){
+           return new ArrayList<>();
+        }
         JSONObject simulatorsJson = new JSONObject(simulatorJsonString);
         JSONObject devicesByTypeJson = (JSONObject) simulatorsJson.get("devices");
         Iterator<String> keys = devicesByTypeJson.keys();
@@ -231,7 +233,9 @@ public class SimulatorManager implements ISimulatorManager {
     private List<DeviceType> getAllDeviceTypes() throws IOException, InterruptedException {
         CommandPromptUtil commandPromptUtil = new CommandPromptUtil();
         String deviceTypesJSONString = commandPromptUtil.runCommandThruProcess("xcrun simctl list -j devicetypes");
-
+        if(deviceTypesJSONString== null || (deviceTypesJSONString!= null && deviceTypesJSONString.isEmpty())){
+            return new ArrayList<>();
+        }
         JSONObject devicesTypesJSON = new JSONObject(deviceTypesJSONString);
         JSONArray devicesTypes = devicesTypesJSON.getJSONArray("devicetypes");
         List<DeviceType> deviceTypes = new ArrayList<>();
@@ -249,7 +253,9 @@ public class SimulatorManager implements ISimulatorManager {
     private List<IOSRuntime> getAllRuntimes() throws IOException, InterruptedException {
         CommandPromptUtil commandPromptUtil = new CommandPromptUtil();
         String runtimesJSONString = commandPromptUtil.runCommandThruProcess("xcrun simctl list -j runtimes");
-
+        if(runtimesJSONString== null || (runtimesJSONString!= null && runtimesJSONString.isEmpty())){
+            return new ArrayList<>();
+        }
         JSONArray runtimesJSON = new JSONObject(runtimesJSONString).getJSONArray("runtimes");
         List<IOSRuntime> IOSRuntimes = new ArrayList<>();
         runtimesJSON.forEach(runtime -> {
